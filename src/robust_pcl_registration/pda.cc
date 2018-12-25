@@ -16,7 +16,7 @@
 Ipda::Ipda(const IpdaParameters& params)
   : params_(params) {}
 
-void Ipda::evaluate(
+Eigen::Affine3f Ipda::evaluate(
     pcl::PointCloud<PointType>::Ptr source_cloud,
     pcl::PointCloud<PointType>::Ptr target_cloud) {
   CHECK(source_cloud);
@@ -121,7 +121,11 @@ void Ipda::evaluate(
     LOG(INFO) << "Transformation epsilon: " << transformation_epsilon;
     if (transformation_epsilon < params_.transformation_epsilon) {
       LOG(INFO) << "IPDA converged." << std::endl;
-      return;
+	  if (params_.save_aligned_cloud) {
+	    LOG(INFO) << "Saving aligned source cloud to: " << params_.aligned_cloud_filename;
+	    pcl::io::savePCDFile(params_.aligned_cloud_filename, *aligned_source);
+	  }
+      return current_transformation.cast<float>();
     }
     previous_transformation = current_transformation;
   }

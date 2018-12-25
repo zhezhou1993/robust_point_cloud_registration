@@ -29,16 +29,19 @@ struct NdtParameters {
   /// Maximum number of registration iterations.
   int maximum_iterations;
   bool use_default_parameters;
+  double maximum_correspondence_distance;
 };
 
 class Ndt {
  public:
     Ndt(const NdtParameters& params);
-    void evaluate(
+    Eigen::Affine3f evaluate(
         pcl::PointCloud<PointType>::Ptr source_cloud,
         pcl::PointCloud<PointType>::Ptr target_cloud);
  private:
   NdtParameters params_;
+  Eigen::Matrix4f final_transform;
+  Eigen::Affine3f final_trans_affine;
 };
 
 #endif // NDT_H_

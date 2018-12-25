@@ -16,6 +16,7 @@ DEFINE_string(ndt_target_cloud_filename, "", "");
 DEFINE_string(ndt_aligned_cloud_filename, "", "");
 DEFINE_double(ndt_source_filter_size, 5, "");
 DEFINE_double(ndt_target_filter_size, 0, "");
+DEFINE_double(ndt_maximum_correspondence_distance, 10.0, "");
 DEFINE_bool(ndt_save_aligned_cloud, true, "");
 DEFINE_bool(ndt_visualize_clouds, true, "");
 DEFINE_string(ndt_frame_id, "", "");
@@ -37,6 +38,7 @@ void parseNdtParameters(NdtParameters* params) {
   params->resolution = FLAGS_ndt_resolution;
   params->maximum_iterations = FLAGS_ndt_maximum_iterations;
   params->use_default_parameters = FLAGS_ndt_use_default_parameters;
+  params->maximum_correspondence_distance = FLAGS_maximum_correspondence_distance;
 }
 
 int main(int argc, char** argv) {

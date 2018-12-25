@@ -1,12 +1,13 @@
 --v=1
 --alsologtostderr=true
---ndt_source_cloud_filename=../samples/bunny/source.pcd
---ndt_target_cloud_filename=../samples/bunny/target.pcd
---ndt_aligned_cloud_filename=../samples/bunny/aligned.pcd
+--ndt_aligned_cloud_filename=../samples/apillar/apillar_aligned.pcd
+--ndt_source_cloud_filename=../samples/apillar/apillar10000.pcd
+--ndt_target_cloud_filename=../samples/apillar/apillar10000_tf.pcd
 --ndt_source_filter_size=0
 --ndt_frame_id=map
---ndt_transformation_epsilon=0.01
+--ndt_transformation_epsilon=1
 --ndt_step_size=0.1
 --ndt_resolution=1.0
---ndt_maximum_iterations=35
+--ndt_maximum_iterations=50
+--ndt_use_default_parameters=false
 

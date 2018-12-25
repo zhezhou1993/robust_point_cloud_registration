@@ -12,7 +12,7 @@
 Ndt::Ndt(const NdtParameters& params)
   : params_(params) {}
 
-void Ndt::evaluate(
+Eigen::Affine3f Ndt::evaluate(
     pcl::PointCloud<PointType>::Ptr source_cloud,
     pcl::PointCloud<PointType>::Ptr target_cloud) {
   CHECK(source_cloud);
@@ -27,6 +27,7 @@ void Ndt::evaluate(
     ndt.setStepSize(params_.step_size);
     ndt.setResolution(params_.resolution);
     ndt.setMaximumIterations(params_.maximum_iterations);
+    ndt.setMaxCorrespondenceDistance(params_.maximum_correspondence_distance);
   }
   LOG(INFO) << "MaxCorrespondenceDistance: " << ndt.getMaxCorrespondenceDistance();
   LOG(INFO) << "RANSACOutlierRejectionThreshold: " << ndt.getRANSACOutlierRejectionThreshold();
@@ -39,6 +40,9 @@ void Ndt::evaluate(
       boost::make_shared<pcl::PointCloud<PointType>>();
   ndt.align(*aligned_source);
   LOG(INFO) << "Final transformation: " << std::endl << ndt.getFinalTransformation();
+  final_transform = ndt.getFinalTransformation();
+  final_trans_affine = final_transform.matrix();
+
   if (ndt.hasConverged()) {
     LOG(INFO) << "NDT converged." << std::endl
               << "The score is " << ndt.getFitnessScore();
@@ -70,5 +74,5 @@ void Ndt::evaluate(
     viewer->spin();
   }
 
-  return;
+  return final_trans_affine;
 }

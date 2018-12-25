@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
   google::ParseCommandLineFlags(&argc, &argv, true);
   ros::init(argc, argv, "IPDA");
   ros::Time::init();
-
+  Eigen::Affine3d final_transform;
   // Load the IPDA parameters.
   IpdaParameters ipda_params;
   parseIpdaParameters(&ipda_params);
@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
 
   // Run IPDA.
   Ipda ipda(ipda_params);
-  ipda.evaluate(source_cloud, target_cloud);
+  final_transform = ipda.evaluate(source_cloud, target_cloud);
 
   return 0;
 }

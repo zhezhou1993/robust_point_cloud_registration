@@ -5,7 +5,7 @@
 --ipda_solver_minimizer_progress_to_stdout=false
 --ipda_solver_use_nonmonotonic_steps=true
 --ipda_use_gaussian=true
---ipda_visualize_clouds=true
+--ipda_visualize_clouds=false
 --ipda_dof=100.0
 --ipda_point_size_aligned_source=3.0
 --ipda_point_size_source=3.0

@@ -42,6 +42,8 @@ void parseGicpParameters(GicpParameters* params) {
   params->ransac_outlier_rejection_threshold = FLAGS_gicp_ransac_outlier_rejection_threshold;
   params->use_reciprocal_correspondence = FLAGS_gicp_use_reciprocal_correspondence;
   params->use_default_parameters = FLAGS_gicp_use_default_parameters;
+  params->maximum_correspondence_distance = FLAGS_gicp_maximum_correspondence_distance;
+
 }
 
 int main(int argc, char** argv) {
